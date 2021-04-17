@@ -156,3 +156,38 @@ def indicator_score(code):
 code='600519.SH'
 indicator_score(code)
 plot_signal(code)
+plot_stock_signal(code)
+
+#获取当前正常上市交易的股票列表
+def get_code():
+    t=datetime.now()
+    df=pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+    #排除上市日期短于4年的个股
+    #获取当前年份
+    year=datetime.now().strftime('%Y')
+    #四年前
+    year=str(int(year)-4)+'0101'
+    #保留上市时间大于四年个股数据
+    df=df[df.list_date<year]
+    #排除银行、保险、多元金融公司
+    df=df[-df.industry.isin(['银行','保险','多元金融'])]
+    #排除st和*ST股
+    df=df[-df.name.str.startswith(('ST'))]
+    df=df[-df.name.str.startswith(('*'))]
+    code=df.ts_code.values
+    name=df.name
+    return dict(zip(name,code))
+
+#计算所有股票财务指标总分
+def get_all_score():
+    df=pd.DataFrame()
+    for name,code in get_code().items():
+        try:
+            df[name]=indicator_score(code)['总分']
+        except:
+            continue
+    return df
+
+dff=get_all_score()    
+#获取最近日期总分排名前15个股
+dff.T.sort_values(dff.T.columns[-1],ascending=False).iloc[:15,-10:]
