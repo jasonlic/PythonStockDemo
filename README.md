@@ -5,6 +5,9 @@ to learn python
 1 pip install akshare --upgrade
 2 pip install --upgrade pandas
 
+# requirements.txt
+pip install pipreqs
+pipreqs ./ --encoding=utf8  --force
 # files
 northfundstoday.py
 当日北向资金 绘制曲线
