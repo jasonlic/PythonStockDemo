@@ -57,10 +57,15 @@ stock_hsgt_hist_em_df.rename(columns={'日期': 'date'},inplace=True)
 '''
 
 
-stock_hsgt_hist_em_df = pd.merge(stock_hsgt_hist_em_df,index_data,how='inner',on='date') #here change 沪深300 to 沪深300_y
-print(stock_hsgt_hist_em_df)
+stock_hsgt_hist_em_df = pd.merge(stock_hsgt_hist_em_df,index_data,how='inner',on='date') #here change 沪深300 to 沪深300_y ?
+#print(stock_hsgt_hist_em_df)
 stock_hsgt_hist_em_df = stock_hsgt_hist_em_df[['date','当日成交净买额','上证综指','深证成指','沪深300_y','创业板指','上证50','中证500','中小板指','上证180']]
 #print(stock_hsgt_hist_em_df)
 stock_hsgt_hist_em_df.plot(x='date',secondary_y =['上证综指','深证成指','沪深300_y','创业板指','上证50','中证500','中小板指','上证180'] )
 
 plt.show()
+
+df = stock_hsgt_hist_em_df[['当日成交净买额','上证综指']]
+# 计算 Pearson 相关系数
+correlation_matrix = df.corr()
+print(correlation_matrix)
