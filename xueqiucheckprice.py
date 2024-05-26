@@ -1,4 +1,6 @@
-#use pysnowball to check xueqiu's stock price    
+#use pysnowball to check xueqiu's stock price  
+#检查雪球网站关注的股票价格是否超出设置的提醒范围。
+
 # login xueqiu web
 # pip install browser_cookie3 pysnowball
 import pysnowball as ball
