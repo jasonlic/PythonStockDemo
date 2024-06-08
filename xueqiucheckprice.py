@@ -52,6 +52,11 @@ def get_requests(url):
     return response #<class 'requests.models.Response'>
 #test get_requests
 #response = get_requests("https://stock.xueqiu.com/v5/stock/alert/config/get.json?symbol=SZ000737")
+
+start = time.perf_counter()
+i=0
+t = 60
+
 for stock in stocks:
     weburl = "https://stock.xueqiu.com/v5/stock/alert/config/get.json?symbol="
     weburl = weburl + stock['symbol']
@@ -72,6 +77,11 @@ for stock in stocks:
         if (stock_price < j_data['price_desc']):
             print(stock['name'],stock['symbol'],' is too high')
 
-
+    i = i+1
+    finsh = "▓" * i    
+    need_do = "-" * (t - i)    
+    progress = (i / t) * 100   
+    dur = time.perf_counter() - start    
+    print("\r{:^3.0f}%[{}->{}]{:.2f}s".format(progress, finsh, need_do, dur), end="")    
 
 
