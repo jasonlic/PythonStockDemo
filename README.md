@@ -9,8 +9,7 @@ to learn python
 pip install pipreqs
 pipreqs ./ --encoding=utf8  --force
 # files
-northfundstoday.py
-当日北向资金 绘制曲线
+
 
 xueqiucheckprice.py
 检查雪球网股价设置
