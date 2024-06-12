@@ -13,3 +13,9 @@ pipreqs ./ --encoding=utf8  --force
 
 xueqiucheckprice.py
 检查雪球网股价设置
+
+northfundshistory.py
+北向资金与各个指数的历史数值显示
+
+GetFundStocks.py
+获取基金持仓股票股数
