@@ -54,8 +54,9 @@ def get_requests(url):
 #response = get_requests("https://stock.xueqiu.com/v5/stock/alert/config/get.json?symbol=SZ000737")
 
 start = time.perf_counter()
-i=0
-t = 60
+i=0 # count
+t = len(stocks)#60
+print('stocks has',t)
 
 for stock in stocks:
     weburl = "https://stock.xueqiu.com/v5/stock/alert/config/get.json?symbol="
@@ -78,10 +79,11 @@ for stock in stocks:
             print(stock['name'],stock['symbol'],' is too high')
 
     i = i+1
-    finsh = "▓" * i    
-    need_do = "-" * (t - i)    
+    #finsh = "▓" * i    
+    #need_do = "-" * (t - i)    
     progress = (i / t) * 100   
     dur = time.perf_counter() - start    
-    print("\r{:^3.0f}%[{}->{}]{:.2f}s".format(progress, finsh, need_do, dur), end="")    
+    #print("\r{:^3.0f}%[{}->{}]{:.2f}s".format(progress, finsh, need_do, dur), end="")    
+    #print("\r{:^3.0f}{:.2f}s".format(progress,  dur))    
 
 
