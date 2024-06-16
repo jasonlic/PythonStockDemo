@@ -84,4 +84,6 @@ for fund in fund_name_em_df['基金代码']:
             fund_portfolio_hold_em_df.loc[fund_portfolio_hold_em_df['股票代码'] == stock,'持股数']
     #print(stock_zh_a_spot_em_dfdf.loc[fund_portfolio_hold_em_df['代码'] == stock,'股数'])
 
-print(stock_zh_a_spot_em_dfdf)
+#print(stock_zh_a_spot_em_dfdf)
+stock_zh_a_spot_em_dfdf.to_csv('fundstocks.cvs')
+print('end\n')
