@@ -29,7 +29,8 @@ fund_name_em_df
        基金代码          拼音缩写            基金简称      基金类型                         拼音全称
 0      000001            HXCZHH            华夏成长混合   混合型-灵活                      HUAXIACHENGZHANGHUNHE'''
 
-fundindex = 0
+fundindex = 0 # for test
+
 for fund in fund_name_em_df['基金代码']:
   # ndarray fund_name_em_df.loc[fund_name_em_df['基金代码'] == fund].index.values
   #fund <class 'str'>
@@ -65,6 +66,7 @@ for fund in fund_name_em_df['基金代码']:
 
     #print(stock_zh_a_spot_df.loc[stock_zh_a_spot_df['代码'] == stock,'股数'].values,'\n')
   '''
+  # for test
   fundindex = fundindex+1
   if fundindex > 10:
     break
