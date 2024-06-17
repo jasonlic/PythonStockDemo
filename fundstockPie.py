@@ -9,7 +9,7 @@ mpl.rcParams["font.sans-serif"] = ["SimHei"]
 mpl.rcParams["axes.unicode_minus"]=False
 
 df = pd.read_csv('fundstocks.cvs')
-df.drop(df[(df.股数 == 'NaN')].index,inplace=True)
+#df.drop(df[(df.股数 == 'NaN')].index,inplace=True)
 print(df)
 
 df['总价'] = df['最新价'] * df['股数']

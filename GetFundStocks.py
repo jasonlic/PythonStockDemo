@@ -24,18 +24,17 @@ stock_zh_a_spot_df['股数'] = 0.0
 fund_name_em_df = ak.fund_name_em()
 fund_sum = len(fund_name_em_df)
 print('fund sum =',fund_sum)
-'''    基金代码          拼音缩写            基金简称      基金类型                         拼音全称
+'''    
+fund_name_em_df
+       基金代码          拼音缩写            基金简称      基金类型                         拼音全称
 0      000001            HXCZHH            华夏成长混合   混合型-灵活                      HUAXIACHENGZHANGHUNHE'''
 
-#print(type(fund_name_em_df[['基金代码']])) #<class 'pandas.core.frame.DataFrame'>
-'''
-0        000001
-21633    970214
-'''
 fundindex = 0
 for fund in fund_name_em_df['基金代码']:
-  #print(fund,type(fund)) #<class 'str'>
-  #print(fund_name_em_df['基金代码'] == fund)
+  # ndarray fund_name_em_df.loc[fund_name_em_df['基金代码'] == fund].index.values
+  #fund <class 'str'>
+  # fund_name_em_df.loc[fund_name_em_df['基金代码'] == fund].index.values[0] int64
+  #print(fund)
   
   '''
   fund:  000621 426    易方达现金增利货币B
@@ -46,26 +45,29 @@ for fund in fund_name_em_df['基金代码']:
   except:
     print('fund: ',fund,fund_name_em_df.loc[fund_name_em_df['基金代码'] == fund,'基金简称'].values,'get stocks NULL\n')
     continue
-  print('fund: ',fund,fund_name_em_df.loc[fund_name_em_df['基金代码'] == fund,'基金简称'].values,'process = %.2f\n',fund_name_em_df.loc[fund_name_em_df['基金代码'] == fund].index/fund_sum)
+  print('fund: ',fund,'process = %.2f' % ((fund_name_em_df.loc[fund_name_em_df['基金代码'] == fund].index.values[0]) / float(fund_sum)))
 
   '''
     序号    股票代码   股票名称  占净值比例 持股数   持仓市值              季度
   0   1     002025    航天电器  3.46      209.92  7947.67  2024年1季度股票投资明细
   '''
   #print(fund_portfolio_hold_em_df)
-
-  for stock in fund_portfolio_hold_em_df['股票代码']:
-    '''
-    002025 703    0
-    '''
-    print(stock)
-    if (stock in stock_zh_a_spot_df['代码']):
+  #print(type(stock_zh_a_spot_df['代码'].values)) #numpy.ndarray
+  for stock in (fund_portfolio_hold_em_df['股票代码'].values):
+    #print(stock)
+    if (stock in (stock_zh_a_spot_df['代码'].values)):
       #only support A stock
       stock_zh_a_spot_df.loc[stock_zh_a_spot_df['代码'] == stock,'股数'] = \
         stock_zh_a_spot_df.loc[stock_zh_a_spot_df['代码'] == stock,'股数'].iloc[0] + \
         fund_portfolio_hold_em_df.loc[fund_portfolio_hold_em_df['股票代码'] == stock,'持股数'].iloc[0]
+    #else:
+      #print(stock,'not support')
 
-    #print(stock_zh_a_spot_df.loc[stock_zh_a_spot_df.代码 == stock,'股数'].iloc[0],'\n')
-
+    #print(stock_zh_a_spot_df.loc[stock_zh_a_spot_df['代码'] == stock,'股数'].values,'\n')
+  '''
+  fundindex = fundindex+1
+  if fundindex > 10:
+    break
+'''
 stock_zh_a_spot_df.to_csv('fundstocks.cvs')
 print('end\n')
