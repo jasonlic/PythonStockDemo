@@ -59,6 +59,7 @@ t = len(stocks)#60
 print('stocks has',t)
 
 for stock in stocks:
+    #print(stock)
     weburl = "https://stock.xueqiu.com/v5/stock/alert/config/get.json?symbol="
     weburl = weburl + stock['symbol']
     response = get_requests(weburl)
@@ -69,12 +70,18 @@ for stock in stocks:
     stock_jason = ball.quotec(stock['symbol'])['data'] # <class 'list'>
 
     stock_price = stock_jason[0]['current']
+    #print(stock_price,type(stock_price))
+    if (stock_price == None): #not have a price
+        continue
 
     if (j_data['price_asc'] != None):
         if (stock_price > j_data['price_asc']):
             print(stock['name'],stock['symbol'],' is too low')
 
     if (j_data['price_desc'] != None):
+ 
+        #print(stock_price,type(stock_price))
+        #print(j_data['price_desc'],type(j_data['price_desc']))
         if (stock_price < j_data['price_desc']):
             print(stock['name'],stock['symbol'],' is too high')
 
