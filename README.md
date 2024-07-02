@@ -4,6 +4,7 @@ to learn python
 # install
 1 pip install akshare --upgrade
 2 pip install --upgrade pandas
+3 pip install browser-cookie3
 
 # requirements.txt
 pip install pipreqs
